@@ -376,13 +376,13 @@ public class Patterns {
   * * * * * * * * *
 
 		 */
-		for(int i=1; i<=5; i++)
+		for(int i=0; i<=5; i++)
 		{
-			for(int j=1; j<5-i; j++)
+			for(int j=0; j<5-i; j++)
 			{
 				System.out.print("  ");
 			}
-			for(int j=1; j<=i*2-1; j++)
+			for(int j=0; j<i*2-1; j++)
 			{
 				System.out.print("* ");
 			}
@@ -399,16 +399,13 @@ public class Patterns {
    0 0 0 0 0 0 0
  1 1 1 1 1 1 1 1 1
 		 */
-		for(int i=1; i<=5; i++)
+		for(int i=0; i<=5; i++)
 		{
-			for(int j=1; j<5-i; j++)
+			for(int j=0; j<5-i; j++)
 			{
-				
-				
-					System.out.print("  ");
-				
+			System.out.print("  ");	
 			}
-			for(int j=1; j<=i*2-1; j++)
+			for(int j=0; j<i*2-1; j++)
 			{
 				if(i%2==0)
 				{
@@ -434,13 +431,13 @@ public class Patterns {
    1 0 1 0 1 0 1 0 1
    
 		 */
-		for(int i=1; i<=5; i++)
+		for(int i=0; i<=5; i++)
 		{
-			for(int j=1; j<5-i; j++)
+			for(int j=0; j<5-i; j++)
 			{
 					System.out.print("  ");
 			}
-			for(int j=1; j<=i*2-1; j++)
+			for(int j=0; j<i*2-1; j++)
 			{
 				if(j%2==0)
 				{
@@ -466,41 +463,237 @@ public class Patterns {
 	 1 2 3 4 5 6 7 
    1 2 3 4 5 6 7 8 9
 		 */
+		for (int i=1; i<=5; i++) {
+            for (int j=1; j<=5-i; j++) {
+                System.out.print("  ");
+            }
+            for (int j=1; j<=i; j++) {
+                System.out.print(j + " ");
+            }
+            for (int j=i-1; j>=1; j--) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
 	}
 	
 	public void pattern24()
 	{
-		
+		/*
+		 1
+		 2 6
+		 3 7 10
+		 4 8 11 13
+		 5 9 12 14 15
+		 */
+		for (int i = 1; i<=5; i++) {
+			int num=i;
+			for (int j=1; j<=i; j++) {
+				System.out.print(num + " ");
+				num += (5-j);
+			}
+			System.out.println();
+		}
 	}
 	
 	public void pattern25()
 	{
+		/**
+		   1
+		 2 1 2
+	   3 2 1 2 3
+	 4 3 2 1 2 3 4
+   5 4 3 2 1 2 3 4 5
+		 */
 		
+		 for (int i = 1; i <=5; i++) {
+            for (int j = i; j < 5; j++) 
+            {
+                System.out.print("  ");
+            }
+            for (int j = i; j >= 2; j--) 
+            {
+                System.out.print(j + " ");
+            }
+            for (int j = 1; j <= i; j++) 
+            {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+
 	}
 	
 	public void pattern26()
 	{
-		
+		/**
+	    	 5
+		   4 5 4
+		 3 4 5 4 3
+	   2 3 4 5 4 3 2
+	 1 2 3 4 5 4 3 2 1
+		 */
+		for (int i = 0; i < 5; i++) {
+            for (int j=0; j<2*(5-i-1); j++) 
+            {
+                System.out.print(" ");
+            }
+            for (int j=5-i; j<=5; j++) 
+            {
+                System.out.print(j + " ");
+            }
+            for (int j=5-1; j>5-i-1; j--) 
+            {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+
 	}
 	
 	public void pattern27()
 	{
+		/**
+		          A
+		        A B A
+		      A B C B A
+		    A B C D C B A
+		  A B C D E D C B A
+		 */
 		
+		 for (int i=0; i <5; i++) 
+		 {
+			 for (int j=0; j<5-i-1; j++) 
+			 {
+				 System.out.print("  ");
+			 }
+			 for (int j=0; j<=i; j++) 
+			 {
+				 System.out.print((char)('A' + j));
+				 if (j<i) 
+				 {
+					 System.out.print(" ");
+				 }
+			 }
+			 for (int j=i-1; j>=0; j--) 
+			 {
+				 System.out.print(" " + (char)('A' + j));
+			 }
+			 System.out.println();
+		 }
+ 
 	}
 	
 	public void pattern28()
 	{
-		
+		/**
+             A
+           B A B
+         C B A B C
+       D C B A B C D
+     E D C B A B C D E
+		 */
+	
+		 for (int i=0; i <5; i++) 
+		 {
+			 for (int j=0; j<5-i-1; j++) 
+			 {
+				 System.out.print("  ");
+			 }
+			 for (int j=i; j>=0; j--) 
+			 {
+				 System.out.print((char)('A' + j));
+				 if (j>0) 
+				 {
+					 System.out.print(" ");
+				 }
+			 }
+			 for (int j=1; j<=i; j++) 
+			 {
+				 System.out.print(" " +(char)('A' + j));
+			 }
+			 System.out.println();
+		 }
+ 
 	}
 	
 	public void pattern29()
 	{
-		
+		/**
+		 1 2 3 4 5 4 3 2 1
+		   1 2 3 4 3 2 1
+		     1 2 3 2 1
+		       1 2 1
+		         1
+		 */
+		for (int i = 1; i <= 5; i++) {
+			for (int j=1; j<i; j++) {
+				System.out.print("  ");
+			}
+			for (int k=1; k<=5-i+1; k++) {
+				System.out.print(k + " ");
+			}
+			for (int j=5-i; j>=1; j--) {
+				System.out.print(j + " ");
+			}
+			System.out.println();
+		}
 	}
 	
 	public void pattern30()
 	{
+		/**
+	   5 4 3 2 1 4 3 2 1
+		 4 3 2 1 3 2 1
+		   3 2 1 2 1
+		     2 1 2
+		       1
+		 */
+
+		 for (int i=0; i<5; i++) {
+            for (int j=0; j< i; j++) 
+            {
+                System.out.print("  ");
+            }
+            for (int j=5-i; j>=1; j--) 
+            {
+                System.out.print(j + " ");
+            }
+            for (int j=2; j<=5-i; j++) 
+            {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+	}
+	public void pattern31()
+	{
+		/**
+		     1
+		   1 * 2
+		 1 * 2 * 3
+	   1 * 2 * 3 * 4
+	 1 * 2 * 3 * 4 * 5
+		 */
 		
+	        for (int i=1; i<=5; i++) 
+	        {
+	            for (int j=1; j<=5-i; j++) 
+	            {
+	                System.out.print("  ");
+	            }
+	            for (int j=1; j<=i; j++) 
+	            {
+	                if (j<i) 
+	                {
+	                    System.out.print(j + " * ");
+	                } 
+	                else{
+	                    System.out.print(j);
+	                }
+	            }
+	            System.out.println();
+	        }
 	}
 
 	public static void main(String[] args) {
@@ -575,6 +768,34 @@ public class Patterns {
 		
 		System.out.println("------------------");
 		p.pattern22();
+				
+		System.out.println("------------------");
+		p.pattern23();
+		
+		System.out.println("------------------");
+		p.pattern24();
+		
+		System.out.println("------------------");
+		p.pattern25();
+		
+		System.out.println("------------------");
+		p.pattern26();
+		
+		System.out.println("------------------");
+		p.pattern27();
+		
+		System.out.println("------------------");
+		p.pattern28();
+		
+		System.out.println("------------------");
+		p.pattern29();
+		
+		System.out.println("------------------");
+		p.pattern30();
+		
+		System.out.println("------------------");
+		p.pattern31();
+
 	}
 
 }
