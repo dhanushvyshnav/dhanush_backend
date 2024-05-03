@@ -62,9 +62,26 @@ public class StringOperations
 		}
 	}
 
-	public void isPamagram()
+	public void isPanagram()
 	{
-
+		String str="Excelsoft";
+		int[] freq=new int[26];
+		 str= str.toUpperCase();
+		 
+		 for(int i=1; i<str.length(); i++)
+		 {
+			 freq[str.charAt(i)-65]++;
+		 }
+		 for(int i=1; i<freq.length; i++)
+		 {
+			 if(freq[i]==0)
+			 {
+				 System.out.println(str + " is a panagram");
+			 }
+			 else {
+				 System.out.println(str + " is not a panagram");
+			 }	 
+		 }
 	}
 
 	public void reverse()
@@ -91,7 +108,7 @@ public class StringOperations
 
 	public void isAllVowelsPresent()
 	{
-
+		
 	}
 
 	public void countVowels()
@@ -124,7 +141,7 @@ public class StringOperations
 		so.isAnagram();
 
 		System.out.println("-------------------");
-		so.isPamagram();
+		so.isPanagram();
 
 		System.out.println("------------------");
 		so.reverse();
@@ -138,5 +155,6 @@ public class StringOperations
 		System.out.println("----------------");
 		so.countVowels();
 	}
+
 
 }
