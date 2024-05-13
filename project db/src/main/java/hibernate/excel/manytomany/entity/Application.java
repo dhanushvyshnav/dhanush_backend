@@ -1,5 +1,7 @@
 package hibernate.excel.manytomany.entity;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,16 +24,23 @@ public class Application
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name ="application_id" )
 	private int id;
+	
+	@Column(name ="status" )
 	private String status;
+	
+	@Column(name ="date" )
 	private String application_date;
+	
+	@Column(name ="approval_date" )
 	private String approval_date;
 	
 	@ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pet_id")
     private Pets pet;
 	

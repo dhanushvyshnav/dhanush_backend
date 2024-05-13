@@ -9,7 +9,7 @@ public class MainRunner {
 
 	public static void main(String[] args) 
 	{
-		EntityManagerFactory factory= Persistence.createEntityManagerFactory("");
+		EntityManagerFactory factory= Persistence.createEntityManagerFactory("project_db");
 		EntityManager manager= factory.createEntityManager();
 		EntityTransaction transaction= manager.getTransaction();
 		

@@ -1,10 +1,13 @@
 package hibernate.excel.manytomany.entity;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -22,18 +25,37 @@ public class Pets
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name ="pet_id" )
 	private int id;
+	
+	@Column(name ="name" )
 	private String name;
+	
+	@Column(name ="species" )	
 	private String species;
+	
+	@Column(name ="breed" )
 	private String breed;
+	
+	@Column(name ="pet_age" )
 	private int age;
+	
+	@Column(name ="gender" )
 	private String gender;
+	
+	@Column(name ="size" )
 	private int size;
+	
+	@Column(name ="url" )
 	private String url;
+	
+	@Column(name ="fee" )
 	private Double fee;
+	
+	@Column(name ="is_adpoted" )
 	private Boolean is_adopted;
 	
-	@OneToMany
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id")
 	private Organization organization;
 
