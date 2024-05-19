@@ -1,4 +1,4 @@
-package com.excel.lms.dto.enums;
+package com.excel.lms.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

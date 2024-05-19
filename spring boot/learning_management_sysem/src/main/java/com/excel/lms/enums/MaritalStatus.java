@@ -1,12 +1,11 @@
-package com.excel.lms.dto.enums;
+package com.excel.lms.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum ContactType {
-
-	PERSONAL("PERSONAL"), OFFICE("OFFICE");
+public enum MaritalStatus {
+ SINGLE("SINGLE"), MARRIED("MARRIED"), DIVORCED("DIVORCED");
 	private final String type;
 }

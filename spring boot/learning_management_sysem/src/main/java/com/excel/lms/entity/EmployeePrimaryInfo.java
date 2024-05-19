@@ -3,6 +3,10 @@ package com.excel.lms.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.excel.lms.enums.Designation;
+import com.excel.lms.enums.EmployeeStatus;
+import com.excel.lms.enums.Gender;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,6 +54,7 @@ public class EmployeePrimaryInfo {
 	
 	@Enumerated(EnumType.STRING)
 	private String gender;
+	
 	private String nationality;
 	
 	@Enumerated(EnumType.STRING)
