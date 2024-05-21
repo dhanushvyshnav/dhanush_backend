@@ -1,4 +1,4 @@
-package com.project.bookmystay.pets;
+package com.project.pets;
 
 /**
  * Hello world!
