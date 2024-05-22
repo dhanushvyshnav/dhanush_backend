@@ -7,6 +7,7 @@ import com.excel.pet.enums.Gender;
 import com.excel.pet.enums.Species;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -36,6 +37,7 @@ public class Pets {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(unique = true)
 	private String petId;
 	
 	@Enumerated(EnumType.STRING)

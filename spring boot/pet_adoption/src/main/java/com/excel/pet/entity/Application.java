@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -27,6 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Builder
+@ToString
 @Table(name="adoption_application")
 public class Application {
 
@@ -34,7 +36,6 @@ public class Application {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-//	private String applicationId;
 	
 	@Enumerated(EnumType.STRING)
 	private ApplicationStatus applicationStatus;
@@ -50,6 +51,7 @@ public class Application {
 	@JoinColumn(name ="petId")
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Pets pets;
+	
 
 	
 }

@@ -25,22 +25,32 @@ public class ObjectUtil {
 				.build();
 	}
 	
-	public static List<Pets> petsToDto(List<PetsDto> listPets){
-		return listPets.stream().map(p -> Pets.builder().petId(p.getPetId())
+	public static UsersDto entityToDto(Users dto){
+		return UsersDto.builder().username(dto.getUsername()).userId(dto.getUserId()).email(dto.getEmail()).password(dto.getPassword()).createdAt(dto.getCreatedAt())
+				.build();
+				
+	}
+	
+	public static Pets petsToDto(PetsDto p){
+		return Pets.builder().petId(p.getPetId())
 				.species(p.getSpecies()).breed(p.getBreed()).gender(p.getGender())
 				.photoUrl(p.getPhotoUrl()).location(p.getLocation())
 				.adoptionFee(p.getAdoptionFee()).isAdopted(p.getIsAdopted())
-				.build()).collect(Collectors.toList());
+				.build();
 	}
 	
-//	public static List<Application> applicationToDto(List<ApplicationDto> dto){
-//		return dto.stream().map(a -> Application.builder().applicationId(a.getApplicationId()).applicationStatus(a.getApplicationStatus())
-//				.applicationDate(a.getApplicationDate()).approvalDate(a.getApprovalDate()).build()).collect(Collectors.toList());
-//	}
+	public static PetsDto petsEntityToDto(Pets dto)
+	{
+		return PetsDto.builder().petId(dto.getPetId()).species(dto.getSpecies()).
+				breed(dto.getBreed()).gender(dto.getGender()).photoUrl(dto.getPhotoUrl()).
+				location(dto.getLocation()).adoptionFee(dto.getAdoptionFee()).
+				isAdopted(dto.getIsAdopted()).build();
+	}
 
 	public static Application applicationDtoToEntity(ApplicationDto dto) {
 
 		return Application.builder().applicationDate(dto.getApplicationDate()).applicationStatus(dto.getApplicationStatus()).approvalDate(dto.getApprovalDate()).build();
 	}
+	
 
 }

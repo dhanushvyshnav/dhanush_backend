@@ -17,6 +17,8 @@ import lombok.Setter;
 @Builder
 public class ApplicationDto {
 	
+	private Integer id;
+	
 	private String userId;
 	
 	private String petId;
