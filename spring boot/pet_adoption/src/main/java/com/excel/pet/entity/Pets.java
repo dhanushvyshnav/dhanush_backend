@@ -35,10 +35,7 @@ public class Pets {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	@Column(unique = true)
-	private String petId;
+	private Integer petId;
 	
 	@Enumerated(EnumType.STRING)
 	private Species species;
@@ -52,9 +49,7 @@ public class Pets {
 	private String photoUrl;
 	private String location;
 	private Double adoptionFee;
-	private Boolean isAdopted;
 	
-	@JoinColumn(name = "userId")
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Users users;
 	

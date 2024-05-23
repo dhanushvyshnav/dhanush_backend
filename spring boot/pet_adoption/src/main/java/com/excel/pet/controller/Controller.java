@@ -10,6 +10,7 @@ import static com.excel.pet.constant.UserConstant.PETS_INFO_ADDED;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,33 +27,52 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin
 public class Controller {
 	
 	@Autowired
 	private final PetService petService; 
 	
-	@PostMapping(path = "/userinfo")
+	@PostMapping(path = "/user")
 	public ResponseEntity<Success<String>> postUsersInfo(@RequestBody UsersDto dto)
 	{
-		String user = petService.addUser(dto);
+		Integer user = petService.addUser(dto);
+		
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(Success.<String>builder()
 				.data(user).message(USER_INFO_SAVED).build());
 		
 	}
 	
-	@PostMapping(path = "/petsinfo")
-	public ResponseEntity<Success<String>> postPetsInfo(@RequestBody PetsDto  dto)
-	{
-		String user = petService.addPet(dto);		
-		return ResponseEntity.status(HttpStatus.CREATED).body(Success.<String>builder()
-				.data(user).message(PETS_INFO_ADDED).build());		
-	}
+
+    @PostMapping("/register")
+    public ResponseEntity<Success<String>> registerUser(@RequestBody UsersDto dto) {
+        Integer result = petService.registerUser(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(Success.<String>builder()
+				.data(result).isError(false).message(USER_INFO_SAVED).build());
+    }
+	
+//	@PostMapping("/signin")
+//	 public ResponseEntity<Success<String>> signIn(@RequestBody UsersDto dto){
+//		
+//		String signIn = petService.signIn(dto);
+//		return ResponseEntity.status(HttpStatus.OK).body(Success.<String>builder()
+//				.data(signIn).isError(false).message(USER_INFO_SAVED).build());		
+//	}
+	
+    @PostMapping(path = "/addPet")
+    public ResponseEntity<Success<Integer>> postPetsInfo(@RequestBody PetsDto dto) {
+        Integer userId = petService.addPet(dto); // Assuming addPet() returns an Integer
+        return ResponseEntity.status(HttpStatus.CREATED).body(Success.<Integer>builder()
+                .data(userId).message(PETS_INFO_ADDED).build());        
+    }
+
+            
 	
 	@PostMapping(path = "/appinfo")
 	public ResponseEntity<Success<String>> postApplicationInfo(@RequestBody ApplicationDto  dto)
 	{
-		String user = petService.addApplication(dto);		
+		Integer user = petService.addApplication(dto);		
 		return ResponseEntity.status(HttpStatus.CREATED).body(Success.<String>builder()
 				.data(user).message(PETS_INFO_ADDED).build());		
 	}
@@ -75,7 +95,7 @@ public class Controller {
 	
 	@PutMapping("/updateStatus")
 	public ResponseEntity<Success<String>> updateApplicationStatus(@RequestBody ApplicationDto dto){
-		String update= petService.setApplicationStatus(dto);
+		Integer update= petService.setApplicationStatus(dto);
 		return ResponseEntity.status(HttpStatus.OK).body(Success.<String>builder()
 				.data(update).message(PETS_INFO_ADDED).build());
 		

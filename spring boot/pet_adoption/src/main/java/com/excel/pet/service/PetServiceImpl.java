@@ -14,21 +14,23 @@ import com.excel.pet.entity.Application;
 import com.excel.pet.entity.Pets;
 import com.excel.pet.entity.Users;
 import com.excel.pet.exception.CustomException;
+import static com.excel.pet.constant.UserConstant.LOGIN_FAILED_MESSAGE;
+import static com.excel.pet.constant.UserConstant.ACCOUNT_NOT_FOUND_MESSAGE;
 import com.excel.pet.repo.ApplicationRepo;
 import com.excel.pet.repo.PetsRepo;
 import com.excel.pet.repo.UserRepo;
 import com.excel.pet.utils.ObjectUtil;
 
-import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 
-@ToString
-@Slf4j
 @Service
 public class PetServiceImpl implements PetService {
 
 	@Autowired
 	private UserRepo userRepo;
+
+	public PetServiceImpl(UserRepo userRepo) {
+		this.userRepo = userRepo;
+	}
 
 	@Autowired
 	private PetsRepo petsRepo;
@@ -38,12 +40,12 @@ public class PetServiceImpl implements PetService {
 
 	/*Add user*/
 	@Override
-	public String addUser(UsersDto dto) {
-		if(!userRepo.findByUserId(dto.getUserId()).isPresent())
+	public Integer addUser(UsersDto dto) {
+		if(!userRepo.findById(dto.getId()).isPresent())
 		{
 			Users usersInfoDto = ObjectUtil.usersInfoDto(dto);
 			Users save = userRepo.save(usersInfoDto);
-			return save.getUserId();
+			return save.getId();
 		}
 		else {
 			throw new CustomException("User already exists!!");
@@ -51,31 +53,92 @@ public class PetServiceImpl implements PetService {
 
 	}
 
-	/*Add Pet*/
 	@Override
-	public String addPet(PetsDto dto) {
-
-		Optional<Users> byUserId = userRepo.findByUserId(dto.getUserId());
-		if(byUserId.isPresent()) {
-			Users users = byUserId.get();
-			Pets pet = ObjectUtil.petsToDto(dto);
-			if(users.getPets()!=null) {
-				users.getPets().add(pet);
-				pet.setUsers(users);
+	public Integer signIn(UsersDto dto) {
+		Optional<Users> email = userRepo.findByEmail(dto.getEmail());
+		if(email.isPresent()) {
+			Users info=email.get();
+			if(info.getPassword().equals(dto.getPassword())) {
 			}
-			return userRepo.save(users).getUserId();
+			else {
+				throw new CustomException(LOGIN_FAILED_MESSAGE);
+			}
 		}
-		else {
-			throw new CustomException("Please give Unique Id for Pet");
-		}
-		
+		throw new CustomException(ACCOUNT_NOT_FOUND_MESSAGE);
 	}
+
+
+	/*register*/
+	public static final String REGISTRATION_FAILED_MESSAGE = "Registration failed. Please try again.";
+	public static final String EMAIL_ALREADY_REGISTERED_MESSAGE = "Email is already registered.";
+
+	@Override
+	public Integer registerUser(UsersDto dto) {
+		// Check if the email is already registered
+		if (userRepo.findByEmail(dto.getEmail()).isPresent()) {
+			throw new CustomException(EMAIL_ALREADY_REGISTERED_MESSAGE);
+		}
+
+		// Create a new user entity and save it to the database
+		Users newUser = new Users();
+		newUser.setId(dto.getId());
+		newUser.setUsername(dto.getUsername());
+		newUser.setEmail(dto.getEmail());
+		newUser.setPassword(dto.getPassword());
+
+		try {
+			userRepo.save(newUser);
+		} catch (Exception e) {
+			throw new CustomException(REGISTRATION_FAILED_MESSAGE);
+		}
+		return null;
+	}
+
+	/*Add Pet*/
+	 //	@Override
+	//	public String addPet(PetsDto dto) {
+	//
+	//		Optional<Users> byUserId = userRepo.findByUserId(dto.getUserId());
+	//		if(byUserId.isPresent()) {
+	//			Users users = byUserId.get();
+	//			Pets pet = ObjectUtil.petsToDto(dto);
+	//			if(users.getPets()!=null) {
+	//				users.getPets().add(pet);
+	//				pet.setUsers(users);
+	//			}
+	//			return userRepo.save(users).getUserId();
+	//		}
+	//		else {
+	//			throw new CustomException("Please give Unique Id for Pet");
+	//		}
+	//
+	//	}
+	/*Add*/
+	public Integer addPet(PetsDto dto) {
+	    Optional<Users> byUserId = userRepo.findById(dto.getPetId());
+	    if (byUserId.isPresent()) {
+	        Users users = byUserId.get();
+	        Pets pet = ObjectUtil.petsToDto(dto);
+	        if (users.getPets() != null) {
+	            users.getPets().add(pet);
+	            pet.setUsers(users);
+	        }
+	        userRepo.save(users);
+	        return users.getId(); // Assuming getId() returns an Integer
+	    } else {
+	        throw new CustomException("Please give Unique Id for Pet");
+	    }
+	}
+
+
+
+
 
 	/*Applying  for Adoption */
 	@Override
-	public String addApplication(ApplicationDto dto) {
-		Optional<Users> byUserId = userRepo.findByUserId(dto.getUserId());
-		Optional<Pets> byPetId = petsRepo.findByPetId(dto.getPetId());
+	public Integer addApplication(ApplicationDto dto) {
+		Optional<Users> byUserId = userRepo.findById(dto.getUser_id());
+		Optional<Pets> byPetId = petsRepo.findByPetId(dto.getId());
 		if(byUserId.isPresent() && byPetId.isPresent()) {
 			Users user = byUserId.get();
 			Pets pets = byPetId.get();
@@ -86,7 +149,7 @@ public class PetServiceImpl implements PetService {
 			pets.getApplications().add(application);
 			userRepo.save(user);
 
-			return user.getUserId();
+			return user.getId();
 		}
 		else {
 			throw new CustomException("Application Applied Successfully");
@@ -109,15 +172,15 @@ public class PetServiceImpl implements PetService {
 	@Override
 	public List<ApplicationDto> findAllPending(ApplicationDto dto) {
 		Optional<Application> applicationStatus = applicationRepo.findAllByApplicationStatus(dto.getApplicationStatus());
-		Optional<Users> id=userRepo.findByUserId(dto.getUserId());
-		Optional<Pets> petId=petsRepo.findByPetId(dto.getPetId());
+		Optional<Users> id=userRepo.findById(dto.getUser_id());
+		Optional<Pets> petId=petsRepo.findByPetId(dto.getId());
 		if(applicationStatus.isPresent() && id.isPresent() && petId.isPresent()) {
 			//			Users user=id.get();
 			//			Pets pet = petId.get();
 			//			Application application = applicationStatus.get();
-			return applicationRepo.findAll().stream().map(e-> ApplicationDto.builder().userId(dto.getUserId()).petId(dto.getPetId())
-					.id(e.getId()).applicationDate(e.getApplicationDate()).applicationStatus(e.getApplicationStatus())
-					.approvalDate(e.getApprovalDate()).build()).collect(Collectors.toList());
+			return applicationRepo.findAll().stream().map(e-> ApplicationDto.builder().user_id(dto.getUser_id()).id(dto.getId())
+					.applicationDate(dto.getApplicationDate()).applicationStatus(dto.getApplicationStatus()).approvalDate(dto.getApprovalDate())
+					.build()).collect(Collectors.toList());
 		}
 		else {
 			throw new CustomException("Something Went Wrong..!");
@@ -125,7 +188,7 @@ public class PetServiceImpl implements PetService {
 	}
 
 	@Override
-	public String setApplicationStatus(ApplicationDto dto) {
+	public Integer setApplicationStatus(ApplicationDto dto) {
 
 
 		Optional<Application> byId = applicationRepo.findById(dto.getId());			
@@ -135,15 +198,18 @@ public class PetServiceImpl implements PetService {
 
 			application.setApplicationStatus(dto.getApplicationStatus());
 
-
 			applicationRepo.save(application);
-			//				log.info(applicationRepo.toString());				
 		}
 		else {
 			throw new CustomException(UserConstant.UPDATE_SUCCESSFULLY);
 		}
 		return null;
 	}
+
+
+
+
+
 
 
 }

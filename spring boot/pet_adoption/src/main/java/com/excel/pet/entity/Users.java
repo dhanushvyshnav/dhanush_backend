@@ -3,6 +3,8 @@ package com.excel.pet.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,13 +33,15 @@ public class Users {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@Column(name ="user_id")
+	private Integer id;	
 	
-	@Column(unique = true)
-	private String userId;
 	private String username;
 	private String email;
 	private String password;
+	
+	@CreationTimestamp
+    @Column(nullable = false, updatable = false)
 	private LocalDate createdAt;
 	
 	@OneToMany(cascade =  CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "users")

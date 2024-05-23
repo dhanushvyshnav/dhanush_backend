@@ -8,11 +8,15 @@ import com.excel.pet.dto.UsersDto;
 
 public interface PetService {
 	
-	public String addUser(UsersDto dto);
+	public Integer addUser(UsersDto dto);
 	
-	public String addPet(PetsDto dto);
+	public Integer signIn(UsersDto dto);
 	
-	public String addApplication(ApplicationDto dto);
+	public Integer registerUser(UsersDto dto);
+	
+	public Integer addPet(PetsDto dto);
+	
+	public Integer addApplication(ApplicationDto dto);
 	
 	public List<UsersDto> getAllUsers();
 	
@@ -20,7 +24,9 @@ public interface PetService {
 	
 	public List<ApplicationDto> findAllPending(ApplicationDto dto);
 	
-	public String setApplicationStatus(ApplicationDto dto);
+	public Integer setApplicationStatus(ApplicationDto dto);
+
+	
 	
 	
 	

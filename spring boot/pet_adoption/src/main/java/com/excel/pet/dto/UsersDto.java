@@ -16,7 +16,7 @@ import lombok.ToString;
 @Builder
 public class UsersDto {
 
-	private String userId;
+	private Integer id;
 	private String username;
 	private String email;
 	private String password;

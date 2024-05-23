@@ -13,7 +13,7 @@ import lombok.Setter;
 @Builder
 public class Success<T> {
 
-	private T data;
+	private Integer data;
 	private String message;
 	private boolean isError;
 }

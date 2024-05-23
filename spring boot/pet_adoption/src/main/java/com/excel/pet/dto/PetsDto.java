@@ -18,9 +18,7 @@ import lombok.Setter;
 @Builder
 public class PetsDto {
 	
-	private String userId;
-	
-	private String petId;
+	private Integer petId;
 	
 	private Species species;
 	
@@ -33,7 +31,6 @@ public class PetsDto {
 	private String location;
 	
 	private Double adoptionFee;
-	
-	private Boolean isAdopted;
+
 
 }

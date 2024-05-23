@@ -13,9 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ApplicationListDto {
 
-	private String userId;
+	private Integer user_id;
 	
-	private String petId;
+	private Integer petId;
 	
 	private List<ApplicationDto> applicationList;
 }

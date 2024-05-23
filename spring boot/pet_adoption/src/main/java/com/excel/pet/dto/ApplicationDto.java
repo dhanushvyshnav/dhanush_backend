@@ -17,11 +17,12 @@ import lombok.Setter;
 @Builder
 public class ApplicationDto {
 	
-	private Integer id;
+//	/*app_id*/
+	private int id;
 	
-	private String userId;
-	
-	private String petId;
+	private Integer user_id;
+		
+	private Integer petId;
 	
 	private ApplicationStatus applicationStatus;
 	

@@ -15,6 +15,11 @@ public class UserConstant {
 	
 	public static final String FETCH_SUCCESSFULLY ="Fetch Successfully";
 	
+	public static final String LOGIN_FAILED_MESSAGE ="Login failed";
+	
+	public static final String ACCOUNT_NOT_FOUND_MESSAGE ="Account not found";
+	
+	
 	
 
 	

@@ -31,11 +31,10 @@ import lombok.ToString;
 @ToString
 @Table(name="adoption_application")
 public class Application {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
 	
 	@Enumerated(EnumType.STRING)
 	private ApplicationStatus applicationStatus;
@@ -44,11 +43,9 @@ public class Application {
 	
 	private LocalDate approvalDate;
 	
-	@JoinColumn(name = "userId")
 	@ManyToOne(cascade =  CascadeType.ALL, fetch = FetchType.EAGER)
 	private Users users;
 	
-	@JoinColumn(name ="petId")
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Pets pets;
 	
