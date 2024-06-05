@@ -15,8 +15,10 @@ import lombok.Setter;
 @Setter
 public class PetsListDto {
 	
-	private Integer user_id;
+	private Integer user_id;		
 	
 	private List<PetsDto> petsList;
+	
+	private String email;
 
 }

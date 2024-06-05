@@ -11,8 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -28,9 +28,13 @@ public class PetsDto {
 	
 	private String photoUrl;
 	
+	private String email;
+	
 	private String location;
 	
 	private Double adoptionFee;
+	
+	private String description;
 
 
 }

@@ -3,6 +3,9 @@ package com.excel.pet.entity;
 import java.time.LocalDate;
 
 import com.excel.pet.enums.ApplicationStatus;
+import com.excel.pet.enums.Breed;
+import com.excel.pet.enums.Gender;
+import com.excel.pet.enums.Species;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -36,12 +39,20 @@ public class Application {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Enumerated(EnumType.STRING)
-	private ApplicationStatus applicationStatus;
+	private Boolean applicationStatus;
 	
 	private LocalDate applicationDate;
 	
-	private LocalDate approvalDate;
+	private String email;
+	
+	@Enumerated(EnumType.STRING)
+	private Species species;
+
+	@Enumerated(EnumType.STRING)
+	private Breed breed;
+
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
 	
 	@ManyToOne(cascade =  CascadeType.ALL, fetch = FetchType.EAGER)
 	private Users users;

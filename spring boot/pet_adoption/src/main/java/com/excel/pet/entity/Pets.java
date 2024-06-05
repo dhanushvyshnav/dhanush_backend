@@ -46,9 +46,14 @@ public class Pets {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	
+
+	private String email;
+	
 	private String photoUrl;
 	private String location;
 	private Double adoptionFee;
+	
+	private String description;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Users users;

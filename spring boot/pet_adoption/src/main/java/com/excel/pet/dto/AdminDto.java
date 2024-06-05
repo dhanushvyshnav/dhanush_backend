@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AdminDto {
 	
-	private String applicationStatus;
+	private Boolean applicationStatus;
 	
 	private String adminId;
 	
